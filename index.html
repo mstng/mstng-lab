@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>mstng | ITエンジニア</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: #0d1117;
+      color: #e6edf3;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .container {
+      max-width: 640px;
+      width: 90%;
+      padding: 48px 0;
+    }
+
+    .avatar {
+      width: 96px;
+      height: 96px;
+      border-radius: 50%;
+      border: 2px solid #30363d;
+      margin-bottom: 16px;
+    }
+
+    h1 {
+      font-size: 24px;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+
+    .handle {
+      color: #7d8590;
+      font-size: 16px;
+      margin-bottom: 16px;
+    }
+
+    .bio {
+      color: #e6edf3;
+      font-size: 15px;
+      line-height: 1.6;
+      margin-bottom: 24px;
+    }
+
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 32px;
+    }
+
+    .tag {
+      background: #21262d;
+      border: 1px solid #30363d;
+      border-radius: 20px;
+      padding: 4px 12px;
+      font-size: 13px;
+      color: #7d8590;
+    }
+
+    .links {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .link-card {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      background: #161b22;
+      border: 1px solid #30363d;
+      border-radius: 8px;
+      padding: 14px 18px;
+      text-decoration: none;
+      color: #e6edf3;
+      transition: border-color 0.2s, background 0.2s;
+    }
+
+    .link-card:hover {
+      border-color: #58a6ff;
+      background: #1c2128;
+    }
+
+    .link-icon {
+      font-size: 20px;
+      width: 28px;
+      text-align: center;
+    }
+
+    .link-info { flex: 1; }
+
+    .link-title {
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    .link-desc {
+      font-size: 12px;
+      color: #7d8590;
+      margin-top: 2px;
+    }
+
+    .link-arrow {
+      color: #7d8590;
+      font-size: 14px;
+    }
+
+    .footer {
+      margin-top: 40px;
+      font-size: 12px;
+      color: #7d8590;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <img
+      src="https://avatars.githubusercontent.com/mstng"
+      alt="mstng"
+      class="avatar"
+    >
+
+    <h1>mstng</h1>
+    <div class="handle">@mstng</div>
+
+    <p class="bio">
+      ITエンジニア（マネジメント寄り）。<br>
+      AIチームと一緒に学習・実験・アウトプット中。
+    </p>
+
+    <div class="tags">
+      <span class="tag">Engineering Manager</span>
+      <span class="tag">Claude Code</span>
+      <span class="tag">Python</span>
+      <span class="tag">Node.js</span>
+      <span class="tag">PHP 10年</span>
+    </div>
+
+    <div class="links">
+      <a href="https://github.com/mstng" class="link-card" target="_blank" rel="noopener">
+        <span class="link-icon">🐙</span>
+        <div class="link-info">
+          <div class="link-title">GitHub</div>
+          <div class="link-desc">github.com/mstng</div>
+        </div>
+        <span class="link-arrow">→</span>
+      </a>
+
+      <a href="https://qiita.com/mstng" class="link-card" target="_blank" rel="noopener">
+        <span class="link-icon">📝</span>
+        <div class="link-info">
+          <div class="link-title">Qiita</div>
+          <div class="link-desc">技術記事・学習アウトプット</div>
+        </div>
+        <span class="link-arrow">→</span>
+      </a>
+
+      <a href="https://github.com/mstng/mstng-lab" class="link-card" target="_blank" rel="noopener">
+        <span class="link-icon">🧪</span>
+        <div class="link-info">
+          <div class="link-title">mstng-lab</div>
+          <div class="link-desc">AIチームと育てる学習リポジトリ</div>
+        </div>
+        <span class="link-arrow">→</span>
+      </a>
+
+      <a href="https://moyan-ten.vercel.app/" class="link-card" target="_blank" rel="noopener">
+        <span class="link-icon">💬</span>
+        <div class="link-info">
+          <div class="link-title">Moyan</div>
+          <div class="link-desc">匿名お悩み共感ボード</div>
+        </div>
+        <span class="link-arrow">→</span>
+      </a>
+    </div>
+
+    <div class="footer">
+      Powered by GitHub Pages · Built with AI team 🤖
+    </div>
+  </div>
+</body>
+</html>
