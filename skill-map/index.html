@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>チームスキルマップ</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: #0d1117;
+      color: #e6edf3;
+      min-height: 100vh;
+    }
+
+    header {
+      background: #161b22;
+      border-bottom: 1px solid #30363d;
+      padding: 16px 32px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    header h1 {
+      font-size: 18px;
+      font-weight: 600;
+      color: #e6edf3;
+    }
+
+    header .badge {
+      background: #1f6feb;
+      color: #fff;
+      font-size: 11px;
+      padding: 2px 8px;
+      border-radius: 12px;
+    }
+
+    .container {
+      display: grid;
+      grid-template-columns: 220px 1fr;
+      gap: 0;
+      min-height: calc(100vh - 57px);
+    }
+
+    /* サイドバー */
+    .sidebar {
+      background: #161b22;
+      border-right: 1px solid #30363d;
+      padding: 20px 0;
+    }
+
+    .sidebar-title {
+      font-size: 11px;
+      color: #7d8590;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      padding: 0 16px 8px;
+    }
+
+    .member-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 16px;
+      cursor: pointer;
+      transition: background 0.15s;
+      border-left: 3px solid transparent;
+    }
+
+    .member-item:hover { background: #1f2937; }
+
+    .member-item.active {
+      background: #1f2937;
+      border-left-color: #1f6feb;
+    }
+
+    .avatar {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+
+    .member-info .name {
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    .member-info .role {
+      font-size: 11px;
+      color: #7d8590;
+    }
+
+    /* メインエリア */
+    .main {
+      padding: 28px 32px;
+    }
+
+    .main-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 24px;
+    }
+
+    .view-toggle {
+      display: flex;
+      gap: 4px;
+      background: #161b22;
+      border: 1px solid #30363d;
+      border-radius: 6px;
+      padding: 3px;
+    }
+
+    .view-btn {
+      padding: 5px 14px;
+      font-size: 12px;
+      border: none;
+      background: transparent;
+      color: #7d8590;
+      cursor: pointer;
+      border-radius: 4px;
+      transition: all 0.15s;
+    }
+
+    .view-btn.active {
+      background: #21262d;
+      color: #e6edf3;
+    }
+
+    /* マトリクスビュー */
+    .matrix-view { display: block; }
+    .radar-view { display: none; }
+
+    .skill-matrix {
+      background: #161b22;
+      border: 1px solid #30363d;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    .matrix-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    .matrix-table th {
+      font-size: 11px;
+      font-weight: 600;
+      color: #7d8590;
+      padding: 10px 14px;
+      text-align: left;
+      border-bottom: 1px solid #30363d;
+      background: #0d1117;
+    }
+
+    .matrix-table th.skill-header {
+      text-align: center;
+      font-size: 10px;
+      white-space: nowrap;
+    }
+
+    .matrix-table td {
+      padding: 12px 14px;
+      border-bottom: 1px solid #21262d;
+      vertical-align: middle;
+    }
+
+    .matrix-table tr:last-child td { border-bottom: none; }
+
+    .matrix-table tr:hover td { background: #1c2128; }
+
+    .member-cell {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      white-space: nowrap;
+    }
+
+    .member-cell .avatar { width: 28px; height: 28px; font-size: 11px; }
+    .member-cell .name { font-size: 13px; }
+
+    .category-row td {
+      background: #0d1117;
+      font-size: 10px;
+      font-weight: 700;
+      color: #7d8590;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      padding: 6px 14px;
+      border-bottom: 1px solid #21262d;
+    }
+
+    /* スキルドット */
+    .skill-cell { text-align: center; }
+
+    .dots {
+      display: flex;
+      gap: 3px;
+      justify-content: center;
+    }
+
+    .dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: #30363d;
+    }
+
+    .dot.filled-1 { background: #f85149; }
+    .dot.filled-2 { background: #e3b341; }
+    .dot.filled-3 { background: #3fb950; }
+    .dot.filled-4 { background: #1f6feb; }
+
+    /* レーダービュー */
+    .radar-container {
+      background: #161b22;
+      border: 1px solid #30363d;
+      border-radius: 8px;
+      padding: 28px;
+    }
+
+    .radar-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+
+    .radar-header .avatar { width: 48px; height: 48px; font-size: 18px; }
+
+    .radar-header .name { font-size: 18px; font-weight: 700; }
+    .radar-header .role { font-size: 13px; color: #7d8590; }
+
+    .radar-chart-wrap {
+      max-width: 420px;
+      margin: 0 auto;
+    }
+
+    /* スキルサマリ */
+    .skill-summary {
+      margin-top: 24px;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+    }
+
+    .skill-category-card {
+      background: #0d1117;
+      border: 1px solid #30363d;
+      border-radius: 6px;
+      padding: 12px;
+    }
+
+    .skill-category-card .cat-title {
+      font-size: 10px;
+      font-weight: 700;
+      color: #7d8590;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 8px;
+    }
+
+    .skill-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 5px;
+    }
+
+    .skill-row .skill-name { font-size: 12px; color: #c9d1d9; }
+
+    /* レベルラベル */
+    .level-legend {
+      display: flex;
+      gap: 16px;
+      margin-bottom: 20px;
+    }
+
+    .level-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 11px;
+      color: #7d8590;
+    }
+
+    .level-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+    }
+
+    /* 凡例 */
+    .legend {
+      display: flex;
+      gap: 20px;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>チームスキルマップ</h1>
+  <span class="badge">β</span>
+</header>
+
+<div class="container">
+  <!-- サイドバー：メンバー一覧 -->
+  <aside class="sidebar">
+    <div class="sidebar-title">メンバー</div>
+    <div id="member-list"></div>
+  </aside>
+
+  <!-- メイン -->
+  <main class="main">
+    <div class="main-header">
+      <div>
+        <div class="level-legend">
+          <div class="level-item">
+            <div class="level-dot" style="background:#f85149"></div> 入門
+          </div>
+          <div class="level-item">
+            <div class="level-dot" style="background:#e3b341"></div> 実務可
+          </div>
+          <div class="level-item">
+            <div class="level-dot" style="background:#3fb950"></div> 得意
+          </div>
+          <div class="level-item">
+            <div class="level-dot" style="background:#1f6feb"></div> エキスパート
+          </div>
+        </div>
+      </div>
+      <div class="view-toggle">
+        <button class="view-btn active" onclick="switchView('matrix')">マトリクス</button>
+        <button class="view-btn" onclick="switchView('radar')">レーダー</button>
+      </div>
+    </div>
+
+    <!-- マトリクスビュー -->
+    <div class="matrix-view" id="matrix-view">
+      <div class="skill-matrix">
+        <table class="matrix-table" id="matrix-table"></table>
+      </div>
+    </div>
+
+    <!-- レーダービュー -->
+    <div class="radar-view" id="radar-view">
+      <div class="radar-container" id="radar-container"></div>
+    </div>
+  </main>
+</div>
+
+<script>
+// ===== データ =====
+const members = [
+  {
+    id: 1, name: "田中 健", role: "Senior Engineer", color: "#1f6feb", initial: "田",
+    skills: {
+      "Python": 4, "JavaScript": 3, "Java": 2, "Go": 1,
+      "React": 3, "Spring": 2, "Django": 4, "Next.js": 2,
+      "AWS": 4, "Docker": 3, "Kubernetes": 2, "CI/CD": 3,
+      "1on1": 1, "採用": 1, "ロードマップ": 2, "プロセス改善": 2
+    }
+  },
+  {
+    id: 2, name: "佐藤 美咲", role: "Frontend Engineer", color: "#3fb950", initial: "佐",
+    skills: {
+      "Python": 1, "JavaScript": 4, "Java": 1, "Go": 0,
+      "React": 4, "Spring": 0, "Django": 1, "Next.js": 4,
+      "AWS": 2, "Docker": 2, "Kubernetes": 1, "CI/CD": 2,
+      "1on1": 2, "採用": 1, "ロードマップ": 1, "プロセス改善": 2
+    }
+  },
+  {
+    id: 3, name: "山本 拓也", role: "Backend Engineer", color: "#e3b341", initial: "山",
+    skills: {
+      "Python": 2, "JavaScript": 2, "Java": 4, "Go": 3,
+      "React": 1, "Spring": 4, "Django": 1, "Next.js": 1,
+      "AWS": 3, "Docker": 4, "Kubernetes": 3, "CI/CD": 4,
+      "1on1": 2, "採用": 2, "ロードマップ": 3, "プロセス改善": 3
+    }
+  },
+  {
+    id: 4, name: "鈴木 彩花", role: "Infrastructure Engineer", color: "#f85149", initial: "鈴",
+    skills: {
+      "Python": 3, "JavaScript": 1, "Java": 1, "Go": 2,
+      "React": 0, "Spring": 1, "Django": 2, "Next.js": 0,
+      "AWS": 4, "Docker": 4, "Kubernetes": 4, "CI/CD": 4,
+      "1on1": 1, "採用": 1, "ロードマップ": 2, "プロセス改善": 3
+    }
+  },
+  {
+    id: 5, name: "中村 誠", role: "Tech Lead", color: "#bc8cff", initial: "中",
+    skills: {
+      "Python": 3, "JavaScript": 3, "Java": 3, "Go": 2,
+      "React": 3, "Spring": 3, "Django": 2, "Next.js": 3,
+      "AWS": 3, "Docker": 3, "Kubernetes": 3, "CI/CD": 3,
+      "1on1": 3, "採用": 3, "ロードマップ": 4, "プロセス改善": 4
+    }
+  },
+  {
+    id: 6, name: "林 亜美", role: "Junior Engineer", color: "#39d353", initial: "林",
+    skills: {
+      "Python": 2, "JavaScript": 2, "Java": 1, "Go": 0,
+      "React": 2, "Spring": 1, "Django": 1, "Next.js": 1,
+      "AWS": 1, "Docker": 2, "Kubernetes": 0, "CI/CD": 1,
+      "1on1": 0, "採用": 0, "ロードマップ": 0, "プロセス改善": 1
+    }
+  }
+];
+
+const categories = {
+  "言語": ["Python", "JavaScript", "Java", "Go"],
+  "フレームワーク": ["React", "Spring", "Django", "Next.js"],
+  "インフラ": ["AWS", "Docker", "Kubernetes", "CI/CD"],
+  "マネジメント": ["1on1", "採用", "ロードマップ", "プロセス改善"]
+};
+
+const dotColors = ["#30363d", "#f85149", "#e3b341", "#3fb950", "#1f6feb"];
+
+let selectedMember = members[0];
+let radarChart = null;
+
+// ===== ドット描画 =====
+function renderDots(level) {
+  return `<div class="dots">${[1,2,3,4].map(i =>
+    `<div class="dot ${i <= level ? 'filled-' + level : ''}"></div>`
+  ).join('')}</div>`;
+}
+
+// ===== サイドバー =====
+function renderSidebar() {
+  const list = document.getElementById('member-list');
+  list.innerHTML = members.map(m => `
+    <div class="member-item ${m.id === selectedMember.id ? 'active' : ''}"
+         onclick="selectMember(${m.id})">
+      <div class="avatar" style="background:${m.color}22;color:${m.color}">${m.initial}</div>
+      <div class="member-info">
+        <div class="name">${m.name}</div>
+        <div class="role">${m.role}</div>
+      </div>
+    </div>
+  `).join('');
+}
+
+// ===== マトリクス =====
+function renderMatrix() {
+  const table = document.getElementById('matrix-table');
+  const allSkills = Object.values(categories).flat();
+
+  // ヘッダー
+  let html = `<thead><tr>
+    <th style="min-width:160px">メンバー</th>
+    ${allSkills.map(s => `<th class="skill-header">${s}</th>`).join('')}
+  </tr></thead><tbody>`;
+
+  // カテゴリごとに区切り行＋メンバー行
+  Object.entries(categories).forEach(([cat, skills]) => {
+    const colSpan = allSkills.length + 1;
+    html += `<tr class="category-row"><td colspan="${colSpan}">${cat}</td></tr>`;
+    members.forEach(m => {
+      html += `<tr>
+        <td>
+          <div class="member-cell">
+            <div class="avatar" style="background:${m.color}22;color:${m.color}">${m.initial}</div>
+            <span class="name">${m.name}</span>
+          </div>
+        </td>
+        ${allSkills.map(s => {
+          const inCat = skills.includes(s);
+          return `<td class="skill-cell">${inCat ? renderDots(m.skills[s] || 0) : '<span style="color:#30363d">—</span>'}</td>`;
+        }).join('')}
+      </tr>`;
+    });
+  });
+
+  html += '</tbody>';
+  table.innerHTML = html;
+}
+
+// ===== レーダー =====
+function renderRadar(member) {
+  const container = document.getElementById('radar-container');
+  const catLabels = Object.keys(categories);
+  const catAverages = catLabels.map(cat => {
+    const skills = categories[cat];
+    const total = skills.reduce((sum, s) => sum + (member.skills[s] || 0), 0);
+    return +(total / skills.length).toFixed(1);
+  });
+
+  container.innerHTML = `
+    <div class="radar-header">
+      <div class="avatar" style="background:${member.color}22;color:${member.color};width:48px;height:48px;font-size:18px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700">${member.initial}</div>
+      <div>
+        <div class="name">${member.name}</div>
+        <div class="role">${member.role}</div>
+      </div>
+    </div>
+    <div class="radar-chart-wrap">
+      <canvas id="radarChart"></canvas>
+    </div>
+    <div class="skill-summary" id="skill-summary"></div>
+  `;
+
+  // レーダーチャート
+  if (radarChart) radarChart.destroy();
+  const ctx = document.getElementById('radarChart').getContext('2d');
+  radarChart = new Chart(ctx, {
+    type: 'radar',
+    data: {
+      labels: catLabels,
+      datasets: [{
+        label: member.name,
+        data: catAverages,
+        backgroundColor: member.color + '33',
+        borderColor: member.color,
+        borderWidth: 2,
+        pointBackgroundColor: member.color,
+        pointRadius: 4
+      }]
+    },
+    options: {
+      scales: {
+        r: {
+          min: 0, max: 4,
+          ticks: { stepSize: 1, color: '#7d8590', font: { size: 10 } },
+          grid: { color: '#30363d' },
+          angleLines: { color: '#30363d' },
+          pointLabels: { color: '#e6edf3', font: { size: 13 } }
+        }
+      },
+      plugins: { legend: { display: false } }
+    }
+  });
+
+  // スキル詳細
+  const summary = document.getElementById('skill-summary');
+  summary.innerHTML = Object.entries(categories).map(([cat, skills]) => `
+    <div class="skill-category-card">
+      <div class="cat-title">${cat}</div>
+      ${skills.map(s => `
+        <div class="skill-row">
+          <span class="skill-name">${s}</span>
+          <div class="dots" style="gap:2px">${[1,2,3,4].map(i =>
+            `<div class="dot" style="width:8px;height:8px;background:${i <= (member.skills[s]||0) ? dotColors[member.skills[s]||0] : '#30363d'}"></div>`
+          ).join('')}</div>
+        </div>
+      `).join('')}
+    </div>
+  `).join('');
+}
+
+// ===== メンバー選択 =====
+function selectMember(id) {
+  selectedMember = members.find(m => m.id === id);
+  renderSidebar();
+  if (document.getElementById('radar-view').style.display !== 'none') {
+    renderRadar(selectedMember);
+  }
+}
+
+// ===== ビュー切替 =====
+function switchView(view) {
+  document.querySelectorAll('.view-btn').forEach(b => b.classList.remove('active'));
+  event.target.classList.add('active');
+
+  if (view === 'matrix') {
+    document.getElementById('matrix-view').style.display = 'block';
+    document.getElementById('radar-view').style.display = 'none';
+  } else {
+    document.getElementById('matrix-view').style.display = 'none';
+    document.getElementById('radar-view').style.display = 'block';
+    renderRadar(selectedMember);
+  }
+}
+
+// ===== 初期化 =====
+renderSidebar();
+renderMatrix();
+</script>
+</body>
+</html>
