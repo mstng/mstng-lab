@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SOLE ARCHIVE — スニーカーを、愛そう。</title>
+<meta name="description" content="好きな一足には、理由がある。NIKE/JORDAN、SALOMON、On、HOKAのフォルム、色、ディテールを楽しむコレクションギャラリー。">
+<meta name="theme-color" content="#d5fc36">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Crect width='40' height='40' rx='6' fill='%23d5fc36'/%3E%3Cpath d='M28 10H15l-4 10h14l-4 10H8' fill='none' stroke='%23111111' stroke-width='5'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="experience.css">
+<script defer src="collection.js"></script><script defer src="experience.js"></script><script defer src="app.js"></script>
+</head>
+<body>
+<a href="#collection" class="skip-link">コレクションへ</a>
+<header class="header">
+<a class="wordmark" href="#" aria-label="SOLE ARCHIVE ホーム">SOLE<span class="brand-symbol">✳</span><br>ARCHIVE<span class="logo-dot">®</span></a>
+<nav aria-label="メインナビゲーション"><a href="#collection" class="nav-active">COLLECTION</a><a href="#about">OUR NOTE</a></nav>
+<button class="saved-toggle" id="saved-toggle" aria-pressed="false"><svg viewBox="0 0 24 24" width="19" height="19" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"/></svg><span class="saved-label">MY PICKS</span><span id="saved-count">0</span></button>
+</header>
+<main id="collection">
+<section class="intro" aria-labelledby="page-title">
+<div><div class="eyebrow" id="scene-eyebrow"><span class="tiny-cross">+</span> FOUR BRANDS. ONE PERSONAL ROTATION.</div><h1 id="page-title">THE ROTATION<span class="lime-period">.</span></h1></div>
+<p class="intro-copy" id="scene-copy">NIKE/JORDAN・SALOMON・On・HOKA<br>好きなブランドを、自分の感性で。</p>
+</section>
+<div class="collection-toolbar"><div class="filters" id="filters" aria-label="ブランドで絞り込み"></div><div class="toolbar-end"><span class="result-count" id="result-count" aria-live="polite"></span><label class="sort-label"><span class="sr-only">並び順</span><select id="sort"><option value="curated">CURATED ORDER</option><option value="brand">BRAND A–Z</option><option value="name">MODEL A–Z</option></select></label></div></div>
+<div id="saved-notice" hidden><span>MY PICKS <small>このブラウザに保存したお気に入り</small></span><button id="reset-view">すべてのモデルを見る</button></div>
+<section id="gallery" class="gallery" aria-label="スニーカーコレクション"></section>
+<div id="empty" class="empty" hidden><span>NO PAIRS YET.</span><p>気になる一足のハートを押して、<br>自分だけのセレクションを作ろう。</p><button class="dark-button" id="empty-reset">コレクションを見る</button></div>
+<div class="archive-end"><span>CURATED WITH LOVE. WORN WITH ATTITUDE.</span><span>END OF SELECTION <span class="tiny-cross">+</span></span></div>
+<section id="about" class="about"><div class="about-top"><span class="eyebrow">THE ARCHIVE NOTE / 001</span><span class="about-star" aria-hidden="true">✳</span></div><div class="about-body"><h2>FOUR BRANDS.<br>ONE ROTATION<span>.</span></h2><div class="about-copy"><h3>好きな一足には、理由がある。</h3><p>NIKE/JORDANのアイコニックなフォルム。<br>SALOMONの複雑なライン。<br>Onの空洞が連なるソール。HOKAの大胆なボリューム。</p><p>誰かのランキングより、自分の「好き」を。<br>SOLE ARCHIVE は、この4ブランドの<br>一足一足をじっくり眺めるためのギャラリーです。</p><a href="#collection" class="about-link">もう一度、コレクションへ</a></div></div></section>
+</main>
+<footer><span>© 2026 SOLE ARCHIVE</span><span>INDEPENDENT SNEAKER GALLERY</span><button id="credits-open">写真・掲載について</button></footer>
+<dialog id="detail-dialog" aria-labelledby="detail-title"><button class="modal-close" aria-label="閉じる" autofocus>×</button><div id="detail-content"></div></dialog>
+<dialog id="exhibit-dialog" aria-labelledby="exhibit-title"><div class="exhibit-shell"><header class="exhibit-header"><div class="exhibit-kicker">SOLE ARCHIVE <span>／ EXHIBITION</span></div><button class="exhibit-close" type="button" aria-label="展示を閉じる">×</button></header><div class="exhibit-stage" id="exhibit-stage"><img id="exhibit-image" alt="" draggable="false"><span class="exhibit-index" id="exhibit-index"></span></div><div class="exhibit-bottom"><div class="exhibit-caption"><span id="exhibit-brand"></span><h2 id="exhibit-title"></h2><p id="exhibit-color"></p></div><div class="exhibit-controls"><fieldset class="backdrop-options"><legend>BACKGROUND</legend><button type="button" data-backdrop="white" aria-pressed="true">WHITE</button><button type="button" data-backdrop="black" aria-pressed="false">BLACK</button><button type="button" data-backdrop="concrete" aria-pressed="false">CONCRETE</button></fieldset><div class="zoom-controls" aria-label="拡大操作"><button type="button" id="zoom-out" aria-label="縮小">−</button><span id="zoom-level">100%</span><button type="button" id="zoom-in" aria-label="拡大">＋</button><button type="button" id="zoom-reset">RESET</button></div></div></div><span class="exhibit-help">ドラッグで移動 · スクロール／ピンチで拡大</span></div></dialog>
+<dialog id="credits-dialog" class="credits" aria-labelledby="credits-title"><button class="modal-close" aria-label="閉じる" autofocus>×</button><h2 id="credits-title">写真・掲載について</h2><p>掲載モデルは展示用に選んだサンプルです。所有品を示すものではありません。本サイトは各ブランドの公式サイトではなく、商品の販売は行っていません。</p><p>商品名・商標・写真の権利は各権利者に帰属します。写真は以下の出典から掲載しています。</p><ul id="credits-list"></ul><p>お気に入りは、この端末・ブラウザに保存されます。</p></dialog>
+<div class="toast" role="status" id="toast"></div>
+</body>
+</html>
