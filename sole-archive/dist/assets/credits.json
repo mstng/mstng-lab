@@ -9,58 +9,58 @@
   },
   {
     "brand": "SALOMON",
-    "model": "XT-6",
-    "source": "https://salomon.jp/products/xt-6-l410866",
-    "credit": "SALOMON / 公式商品画像・著作権は各ブランドに帰属",
-    "license": null,
-    "licenseUrl": null
+    "model": "SPEEDCROSS",
+    "source": "https://commons.wikimedia.org/wiki/File:Salomon_trail_running_shoes_women_Speedcross.jpg",
+    "credit": "撮影: Jjanhone / CC BY-SA 4.0（Wikimedia Commons）",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/"
   },
   {
     "brand": "On",
-    "model": "Cloudmonster 3",
-    "source": "https://www.on.com/it-it/products/cloudmonster-3-m-3mg1005/mens/black-black-shoes-3MG10051043",
-    "credit": "On / 公式商品画像・著作権は各ブランドに帰属",
-    "license": null,
-    "licenseUrl": null
+    "model": "Cloud",
+    "source": "https://commons.wikimedia.org/wiki/File:On_Cloud_Running_Shoes.jpg",
+    "credit": "撮影: Aw1805 / CC BY-SA 4.0（Wikimedia Commons）",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/"
   },
   {
     "brand": "HOKA",
-    "model": "Bondi 9",
-    "source": "https://au.hoka.com/products/m-bondi-9-1162011-bwht-bwht",
-    "credit": "HOKA / 公式商品画像・著作権は各ブランドに帰属",
-    "license": null,
-    "licenseUrl": null
+    "model": "Bondi 8",
+    "source": "https://commons.wikimedia.org/wiki/File:Hoka_Bondi_8_-_chalk_violet.jpg",
+    "credit": "撮影: Ssu / CC BY-SA 4.0（Wikimedia Commons）",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/"
   },
   {
     "brand": "NIKE/JORDAN",
     "model": "AIR MAX 90",
-    "source": "https://www.nike.com/no/t/air-max-90-sko-til-herre-R0p58M/CN8490-100",
-    "credit": "Nike / 公式商品画像・著作権は各ブランドに帰属",
-    "license": null,
-    "licenseUrl": null
+    "source": "https://commons.wikimedia.org/wiki/File:Nike_Air_Max_90.jpg",
+    "credit": "撮影: Mfagoaguna1 / CC BY-SA 4.0（Wikimedia Commons）",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/"
   },
   {
     "brand": "SALOMON",
-    "model": "ACS PRO",
-    "source": "https://salomon.jp/products/acs-pro-l471799",
-    "credit": "SALOMON / 公式商品画像・著作権は各ブランドに帰属",
-    "license": null,
-    "licenseUrl": null
+    "model": "OUTLINE PRISM GTX",
+    "source": "https://commons.wikimedia.org/wiki/File:Salomon_Outline_Prism_GTX_tursko_herre.jpg",
+    "credit": "撮影: Ssu / CC BY-SA 4.0（Wikimedia Commons）",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/"
   },
   {
     "brand": "On",
-    "model": "Cloudtilt",
-    "source": "https://www.on.com/en-jp/products/cloudtilt-w-3we1005/womens/white-ivory-shoes-3WE10050924",
-    "credit": "On / 公式商品画像・著作権は各ブランドに帰属",
-    "license": null,
-    "licenseUrl": null
+    "model": "Cloud シリーズ",
+    "source": "https://commons.wikimedia.org/wiki/File:On_Clouds_running_shoes.jpg",
+    "credit": "撮影: Goodreg3 / CC BY-SA 4.0（Wikimedia Commons）",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/"
   },
   {
     "brand": "HOKA",
-    "model": "Clifton 10",
-    "source": "https://au.hoka.com/products/m-clifton-10-1162030-wblc-wblc",
-    "credit": "HOKA / 公式商品画像・著作権は各ブランドに帰属",
-    "license": null,
-    "licenseUrl": null
+    "model": "Clifton 7",
+    "source": "https://commons.wikimedia.org/wiki/File:Hoka_Clifton_7.jpg",
+    "credit": "撮影: Ssu / CC BY-SA 4.0（Wikimedia Commons）",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/"
   }
 ]

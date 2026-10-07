@@ -36,7 +36,7 @@ function openExhibition(id){
   const dialog=document.getElementById('exhibit-dialog');
   const image=document.getElementById('exhibit-image');
   image.src=p.image;image.alt=p.name+' '+p.color;
-  image.classList.toggle('photo-print',/pair-[13456]\.webp|bondi\.webp|clifton\.webp/.test(p.image));
+  image.classList.toggle('photo-print',/pair-1\.webp|photo-[a-z0-9-]+\.webp/.test(p.image));
   document.getElementById('exhibit-index').textContent='NO. '+String(p.number||p.id).padStart(3,'0');
   document.getElementById('exhibit-brand').textContent=p.brand;
   document.getElementById('exhibit-title').textContent=p.name;
